@@ -5,6 +5,11 @@ import LocationList from './location/LocationList'
 import EmployeeList from './employees/EmployeeList'
 import OwnerList from './owners/OwnerList'
 import SchoolList from './school/SchoolList'
+import AnimalManager from "../modules/AnimalManager"
+import OwnerManager from '../modules/OwnerManager';
+import SchoolManager from "../modules/SchoolManager"
+import EmployeeManager from '../modules/EmployeeManager';
+import LocationManager from '../modules/LocationManager';
 
 
 export default class ApplicationViews extends Component {
@@ -17,23 +22,33 @@ export default class ApplicationViews extends Component {
         schools: []
     }
 componentDidMount(){
-    const newState = {}
-    fetch("http://localhost:5002/animals")
-    .then(r => r.json())
-    .then(animals => newState.animals = animals)
-    .then(() => fetch("http://localhost:5002/employees")
-    .then(r => r.json()))
-    .then(employees => newState.employees = employees)
-    .then(() => fetch("http://localhost:5002/owners")
-    .then(r => r.json()))
-    .then(owners => newState.owners = owners)
-    .then(() => fetch("http://localhost:5002/locations")
-    .then(r => r.json()))
-    .then(locations => newState.locations = locations)
-    .then(() => fetch("http://localhost:5002/schools")
-    .then(r => r.json()))
-    .then(schools => newState.schools = schools)
-    .then(() => this.setState(newState))
+   // Example code. Make this fit into how you have written yours.
+AnimalManager.getAll().then(allAnimals => {
+    this.setState({
+        animals: allAnimals
+    })
+})
+OwnerManager.getAll().then(AllOwners => {
+    this.setState({
+        owners: AllOwners
+    })
+})
+SchoolManager.getAll().then(AllSchools => {
+    this.setState({
+        schools: AllSchools
+    })
+   
+})
+EmployeeManager.getAll().then(AllEmployees => {
+    this.setState({
+        employees: AllEmployees
+    })
+})
+LocationManager.getAll().then(AllLocations => {
+    this.setState({
+        locations: AllLocations
+    })
+})
 }
 
 
