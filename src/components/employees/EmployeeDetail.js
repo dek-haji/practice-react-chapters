@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import pic from "./pic.png"
-import { Link } from "react-router-dom"
 
 
-export default class EmployeeList extends Component {
+class EmployeeList extends Component {
     render() {
-      
+        const employee = this.props.employees.find(a => a.id === parseInt(this.props.match.params.employeeId)) || {}
         return (
             <section className="employees">
                 {
@@ -15,12 +14,14 @@ export default class EmployeeList extends Component {
                                 <h4 className="card-title">
                                     {employee.name}
                                     <img src={pic} className="icon--pic" />
-                                    <Link className="nav-link" to={`/employees/${employee.id}`}>Details</Link>
+                                    </h4>
+                        <h1 className="card-title">{employee.name} </h1>
                                     <a href="#"
-                                        onClick={() => this.props.deleteEmployee(employee.id)}
-                                        className="card-link">Deete</a>
+                                        onClick={() => this.props.deleteEmployee(employee.id)
+                                        .then(() => this.props.history.push("/employees"))}
+                                        className="card-link">Delete</a>
                             
-                                </h4>
+                                
 
                             </div>
 
@@ -33,3 +34,4 @@ export default class EmployeeList extends Component {
     }
 }
 
+export default EmployeeList
