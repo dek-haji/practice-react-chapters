@@ -10,6 +10,9 @@ import OwnerManager from '../modules/OwnerManager';
 import SchoolManager from "../modules/SchoolManager"
 import EmployeeManager from '../modules/EmployeeManager';
 import LocationManager from '../modules/LocationManager';
+import AnimalDetail  from "./animals/AnimalDetail"
+import EmployeeDetail from "./employees/EmployeeDetail"
+import OwnerDetail from "./owners/OwnerDetail"
 
 
 export default class ApplicationViews extends Component {
@@ -109,12 +112,23 @@ deleteOwners = id => {
                 <Route exact path="/animals" render={(props) => {
                      return <AnimalList deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
                 }} />
+                <Route path="/animals/:animalId(\d+)" render={(props) => {
+    return <AnimalDetail {...props} deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
+}} />
                 < Route exact path="/employees" render={(props) => {
                     return <EmployeeList deleteEmployee={this.deleteEmployee} employees={this.state.employees} />
 
                 }} />
+                 < Route path="/employees/:employeeId(\d+)" render={(props) => {
+                    return <EmployeeDetail {...props} deleteEmployee={this.deleteEmployee} employees={this.state.employees} />
+
+                }} />
                 <Route exact path="/owners" render={(props) => {
                     return <OwnerList deleteOwners={this.deleteOwners} owners={this.state.owners} />
+                }} />
+                 < Route path="/owners/:ownerId(\d+)" render={(props) => {
+                    return <OwnerDetail {...props} deleteOwners={this.deleteOwners} owners={this.state.owners} />
+
                 }} />
                 <Route exact path="/schools" render={(props) => {
                     return <SchoolList schools={this.state.schools} />
